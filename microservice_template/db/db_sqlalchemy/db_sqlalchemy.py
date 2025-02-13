@@ -12,11 +12,11 @@ def create(data: Base, db: Session) -> Base:
 
 
 
-"""def db_create_recipe(recipe_data: CreateRecipe, user_id: int, db: Session):
+"""def db_create_recipe(recipe_data: CreateRecipe, user_id: int, test_db: Session):
     new_recipe = Recipe(
         **recipe_data.model_dump(exclude={"ingredients"}), created_by=user_id
     )
-    db.add(new_recipe)
-    db.commit()
-    db.refresh(new_recipe)
+    test_db.add(new_recipe)
+    test_db.commit()
+    test_db.refresh(new_recipe)
     return new_recipe"""
