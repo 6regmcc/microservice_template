@@ -11,6 +11,7 @@ fastapi = {extras = ["standard"], version = "^0.115.8"}
 sqlalchemy = "^2.0.38"
 pytest = "^8.3.4"
 pytest-env = "^1.1.5"
+psycopg = {extras = ["binary", "pool"], version = "^3.2.4"}
 
 
 [build-system]
@@ -20,6 +21,6 @@ build-backend = "poetry.core.masonry.api"
 [tool.pytest.ini_options]
 env = [
     "ENVIRONMENT=TEST",
-    "DATABASE_URL=sqlite:///tests/test_database.db",
+    "DATABASE_URL=postgresql+psycopg://postgres:postgres@localhost:5456/postgres",
 
 ]
