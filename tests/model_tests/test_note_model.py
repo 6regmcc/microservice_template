@@ -60,8 +60,8 @@ def test_db_nullable(db_inspector):
 
 def test_server_default(db_inspector):
     columns = {columns["name"]: columns for columns in db_inspector.get_columns("note")}
-    assert columns["date_created"]["default"] == "CURRENT_TIMESTAMP"
-    assert columns["date_modified"]["default"] == "CURRENT_TIMESTAMP"
+    assert columns["date_created"]["default"] == "now()"
+    assert columns["date_modified"]["default"] == "now()"
     #assert columns["published"]["default"] == False
 
 

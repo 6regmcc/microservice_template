@@ -1,6 +1,10 @@
 from datetime import datetime
 
+import psycopg
+import pytest
+import sqlalchemy
 from sqlalchemy import DateTime
+
 
 from microservice_template.db.db_sqlalchemy.db_sqlalchemy import create
 from microservice_template.models.note import Note
@@ -22,7 +26,21 @@ def test_create_note_success(db_session):
 
 
 def test_create_note_failure(db_session):
-    new_note = Note(note_title="Note_Title", note_body="Note_Body")
+    new_note = Note(
+        note_title="Note_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_Title",
+        note_body="Note_Body")
+    with pytest.raises(sqlalchemy.exc.IntegrityError):
+        created_note: Note = create(new_note, db=db_session)
+
+
+
+
+def test_create_note_failure(db_session):
+    new_note = Note(
+        note_title="Note_Title",
+        note_body="Note_Body")
     created_note: Note = create(new_note, db=db_session)
-    second_note = Note(note_title="Note_Title", note_body="Note_Body")
-    created_note: Note = create(new_note, db=db_session)
+    new_note2 = Note(note_title="Note_Title",
+        note_body="Note_Body")
+    with pytest.raises(sqlalchemy.exc.IntegrityError):
+        created_note2: Note = create(new_note2, db=db_session)
