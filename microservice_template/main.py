@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from sqlalchemy.orm import Session
 
 from microservice_template.config.db_config import db_create_all, get_db
-from microservice_template.db.db import db_create_note
+from microservice_template.db.db import db_create_note, db_get_all_notes
 from microservice_template.schemas.note import ReturnNote, CreateNote
 
 
@@ -34,3 +34,9 @@ async def root():
 async def create_note(note_data: CreateNote, db: Annotated[Session, Depends(get_db)]):
     new_note = db_create_note(note_data, db)
     return new_note
+
+
+@app.get("/notes")
+async def get_all_notes(db: Annotated[Session, Depends(get_db)]):
+    found_notes = db_get_all_notes(db=db)
+    return found_notes

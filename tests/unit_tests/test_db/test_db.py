@@ -30,7 +30,7 @@ def create_note_model(create_note_data: CreateNote):
 
 @pytest.fixture(scope="function")
 def return_note_model(create_note_data: CreateNote):
-    return_note_model: Note = Note(**create_note_data.model_dump(),date_created=datetime.datetime.now(),date_modified=datetime.datetime.now(),published=False)
+    return_note_model: Note = Note(**create_note_data.model_dump(),id=1, date_created=datetime.datetime.now(),date_modified=datetime.datetime.now(),published=False)
     return return_note_model
 
 

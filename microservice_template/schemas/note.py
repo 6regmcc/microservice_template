@@ -9,6 +9,7 @@ class CreateNote(BaseModel):
 
 
 class ReturnNote(CreateNote):
+    id: int
     published: bool
     date_created: datetime
     date_modified: datetime
