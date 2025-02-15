@@ -12,6 +12,7 @@ from microservice_template.models.note import Note
 
 
 
+
 def test_create_note_success(db_session):
     new_note = Note(note_title="Note_Title",note_body="Note_Body")
     created_note: Note = create(new_note, db=db_session)
@@ -44,3 +45,5 @@ def test_create_note_failure_unique_constraint(db_session):
         note_body="Note_Body")
     with pytest.raises(sqlalchemy.exc.IntegrityError):
         created_note2: Note = create(new_note2, db=db_session)
+
+

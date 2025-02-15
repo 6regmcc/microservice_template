@@ -34,9 +34,13 @@ def return_note_model(create_note_data: CreateNote):
     return return_note_model
 
 
-#@mock.patch("microservice_template.db.db.create", return_value=return_note_model)
+
 def test_create_note(create_note_data: CreateNote, return_note_model: Note, mocker: MockerFixture, db_session: Session):
     mocker.patch("microservice_template.db.db.create", return_value=return_note_model)
     new_note = db_create_note(create_note_data, db_session)
     assert isinstance(new_note, ReturnNote)
     microservice_template.db.db.create.assert_called_once()
+
+
+
+
