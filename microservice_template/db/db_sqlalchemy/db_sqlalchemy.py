@@ -1,3 +1,4 @@
+from sqlalchemy import Sequence, select
 from sqlalchemy.orm import Session
 
 from microservice_template.config.db_config import Base, get_db
@@ -10,16 +11,20 @@ def create(data: Base, db: Session) -> Base:
     return data
 
 
+def get_all(model: Base, db: Session) -> Sequence[Base]:
+    found_data =  db.scalars(select(model)).all()
+    return found_data
 
 
 
+"""def db_get_all_recipies(db: Session) -> list[ReturnRecipe]:
+    found_recipies = db.scalars(select(Recipe)).all()
+    return_recipies = [
+        ReturnRecipe(
+            **recipe.to_dict(),
+            ingredients=[ingredient.to_dict() for ingredient in recipe.ingredients],
+        )
+        for recipe in found_recipies
+    ]
 
-
-"""def db_create_recipe(recipe_data: CreateRecipe, user_id: int, test_db: Session):
-    new_recipe = Recipe(
-        **recipe_data.model_dump(exclude={"ingredients"}), created_by=user_id
-    )
-    test_db.add(new_recipe)
-    test_db.commit()
-    test_db.refresh(new_recipe)
-    return new_recipe"""
+    return return_recipies"""

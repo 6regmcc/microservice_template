@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 
 from microservice_template.config.db_config import Base
 from microservice_template.db.db_sqlalchemy.db_sqlalchemy import create
+
 from microservice_template.models.note import Note
 from microservice_template.schemas.note import CreateNote
 
@@ -26,4 +27,6 @@ def test_mock_db(mocker, db_session: Session, note_model_data:Note, ):
     sqlalchemy.orm.session.Session.add.assert_called_once_with(note_model_data)
     sqlalchemy.orm.session.Session.commit.assert_called_once()
     sqlalchemy.orm.session.Session.refresh.assert_called_once()
+
+
 
