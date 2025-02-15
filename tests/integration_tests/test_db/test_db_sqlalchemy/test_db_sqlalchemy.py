@@ -25,7 +25,7 @@ def test_create_note_success(db_session):
     assert isinstance(created_note, Note)
 
 
-def test_create_note_failure(db_session):
+def test_create_note_failure_check_constraint(db_session):
     new_note = Note(
         note_title="Note_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_TitleNote_Title",
         note_body="Note_Body")
@@ -35,7 +35,7 @@ def test_create_note_failure(db_session):
 
 
 
-def test_create_note_failure(db_session):
+def test_create_note_failure_unique_constraint(db_session):
     new_note = Note(
         note_title="Note_Title",
         note_body="Note_Body")

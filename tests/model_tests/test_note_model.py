@@ -66,6 +66,5 @@ def test_server_default(db_inspector):
 
 
 def test_model_structure_unique_constraints(db_inspector):
-
     unique_constraints = [constraint["column_names"][0] for constraint in db_inspector.get_unique_constraints("note")]
     assert 'note_title' in unique_constraints
