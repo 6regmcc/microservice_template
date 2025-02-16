@@ -13,6 +13,7 @@ pytest = "^8.3.4"
 pytest-env = "^1.1.5"
 psycopg = {extras = ["binary", "pool"], version = "^3.2.4"}
 pytest-mock = "^3.14.0"
+aio-pika = "^9.5.4"
 
 
 [build-system]
