@@ -35,7 +35,7 @@ async def root():
 
 @app.post("/create_note", response_model=ReturnNote)
 async def create_note(note_data: CreateNote, db: Annotated[Session, Depends(get_db)]):
-    new_note = db_create_note(note_data, db)
+    new_note = await db_create_note(note_data, db)
     return new_note
 
 

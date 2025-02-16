@@ -2,7 +2,7 @@ import asyncio
 
 from aio_pika import connect
 from aio_pika.abc import AbstractIncomingMessage
-
+from os import environ
 
 async def on_message(message: AbstractIncomingMessage) -> None:
     """
@@ -19,7 +19,7 @@ async def on_message(message: AbstractIncomingMessage) -> None:
 
 async def main() -> None:
     # Perform connection
-    connection = await connect("amqp://guest:guest@localhost/")
+    connection = await connect(f"amqp://guest:guest@{environ.get("RABBITMQ_URL")}/")
     async with connection:
         # Creating a channel
         channel = await connection.channel()
