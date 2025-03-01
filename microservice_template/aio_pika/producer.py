@@ -10,8 +10,8 @@ async def main(message: ReturnNote) -> None:
     # Perform connection
     connection = await connect(f"amqp://guest:guest@{environ.get("RABBITMQ_URL")}/")
     mes_body = {**message.model_dump()}
-    json_mes_body_json = json.dumps(mes_body, default=str)
-    encoded_json_message_body = json_mes_body_json.encode()
+    json_mes_body_json: str = json.dumps(mes_body, default=str)
+    encoded_json_message_body: bytes = json_mes_body_json.encode()
 
     async with connection:
         # Creating a channel

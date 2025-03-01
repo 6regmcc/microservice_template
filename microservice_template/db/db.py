@@ -12,7 +12,7 @@ from microservice_template.aio_pika.producer import main as publish
 async def db_create_note(create_note_data: CreateNote, db:Session) -> ReturnNote:
     new_note: Note = Note(**create_note_data.model_dump())
     created_node: Base = create(new_note, db)
-    return_note: ReturnNote = ReturnNote(**created_node.to_dict())
+    return_note: ReturnNote =  ReturnNote(**created_node.to_dict())
     await publish(return_note)
     return return_note
 
