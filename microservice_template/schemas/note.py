@@ -13,3 +13,5 @@ class ReturnNote(CreateNote):
     published: bool
     date_created: datetime
     date_modified: datetime
+
+

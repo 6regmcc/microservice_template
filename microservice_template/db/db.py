@@ -13,7 +13,7 @@ async def db_create_note(create_note_data: CreateNote, db:Session) -> ReturnNote
     new_note: Note = Note(**create_note_data.model_dump())
     created_node: Base = create(new_note, db)
     return_note: ReturnNote =  ReturnNote(**created_node.to_dict())
-    await publish(return_note)
+    await publish(return_note, "note.created" )
     return return_note
 
 
@@ -23,3 +23,9 @@ def db_get_all_notes(db:Session) -> list[ReturnNote]:
     return return_notes
 
 
+async def db_update_note(update_note_data: CreateNote, note_id: int, db:Session) -> ReturnNote:
+    note_to_update: Note| None = db.get(Note, note_id)
+    for key, value in update_note_data:
+        setattr(note_to_update, key, value)
+    db.commit()
+    return ReturnNote(**note_to_update.to_dict())
