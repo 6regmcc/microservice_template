@@ -21,7 +21,7 @@ def get_one(model: Base, primary_key: int, db: Session) -> Base| None:
 
 def update(updated_data: Base, primary_key: int, model: Base, db: Session) -> Base:
     found_one = get_one(model, primary_key, db)
-    for key, value in model:
+    for key, value in updated_data.to_dict().items():
         setattr(found_one, key, value)
     db.commit()
     return found_one

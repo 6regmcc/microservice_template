@@ -7,7 +7,7 @@ from sqlalchemy import DateTime
 from sqlalchemy.orm import Session
 
 from microservice_template.config.db_config import Base
-from microservice_template.db.db_sqlalchemy.db_sqlalchemy import create, get_all, get_one
+from microservice_template.db.db_sqlalchemy.db_sqlalchemy import create, get_all, get_one, update
 from microservice_template.models.note import Note
 
 
@@ -81,3 +81,13 @@ def test_get_one(db_session):
     assert found_note.published == created_note.published
     assert found_note.date_created == created_note.date_created
     assert found_note.date_modified == found_note.date_modified
+
+
+def test_update(db_session):
+    new_note = Note(note_title="Note_Title", note_body="Note_Body")
+    created_note: Note = create(new_note, db=db_session)
+    created_note.note_title = 'This title was updated'
+    updated_note: Note = update(created_note, created_note.id,type(created_note),db_session)
+    assert updated_note.note_title == 'This title was updated'
+    assert updated_note.note_body == created_note.note_body
+    assert updated_note.id  == created_note.id
